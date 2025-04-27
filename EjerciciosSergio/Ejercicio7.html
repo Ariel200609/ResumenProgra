@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio7</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="controles">
+        <button id="inicio">Iniciar</button>
+        <button id="detener">Detener</button>
+    </div>
+
+    <script>
+        const iniciar = document.getElementById("inicio");
+        const detener = document.getElementById("detener");
+        const body = document.body;
+        const colors = ["red", "green", "blue", "yellow", "purple", "orange", "pink"];
+        let color = 0;
+        let timer = null;
+
+        function start () {
+            if (timer === null) {
+                timer = setInterval(() => {
+                    if (color >= colors.length) {
+                    color = 0;
+                }
+                body.style.backgroundColor = colors[color];
+                color++;   
+                }, 1000);
+            }
+        }
+        function stop () {
+            clearInterval(timer);
+        }
+        iniciar.addEventListener("click", start);
+        detener.addEventListener("click", stop);
+    </script>
+</body>
+</html>

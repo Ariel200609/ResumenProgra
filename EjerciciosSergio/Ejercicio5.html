@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            color: white;
+            margin: 0;
+        }
+        label {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .contenedor {
+            border: solid 1px white;
+            padding: 80px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <label for="rojo">rojo</label>
+        <input id="rojo" type="range" value="0" min="0" max="255" step="1">
+        <label for="verde">verde</label>
+        <input id="verde" type="range" value="0" min="0" max="255" step="1">
+        <label for="azul">azul</label>
+        <input id="azul" type="range" value="0" min="0" max="255" step="1">
+    </div>
+
+    <script>
+        const body = document.querySelector("body");
+        const contenedor = document.querySelector(".contenedor");
+        const labels = document.querySelectorAll("label");
+        const rojo = document.getElementById("rojo");
+        const verde = document.getElementById("verde");
+        const azul = document.getElementById("azul");
+
+        function actualizarColores() {
+            const r = rojo.value;
+            const g = verde.value;
+            const b = azul.value;
+            body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            contenedor.style.backgroundColor = `rgb(${255 - r}, ${255 - g}, ${255 - b})`;
+            labels.forEach((label) => {
+                label.style.color = `rgb(${r}, ${g}, ${b})`;
+            });
+        }
+
+        rojo.addEventListener("input", actualizarColores);
+        verde.addEventListener("input", actualizarColores);
+        azul.addEventListener("input", actualizarColores);
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio6</title>
+</head>
+<style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            color: white;
+            gap:5px;
+        }
+        .contenedor{
+            position:relative;
+            width: 355px;
+            height: 355px;
+            border: solid 1px rgb(0, 0, 0);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .caja{
+            position:absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(241, 1, 157);
+            border: solid 1px white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        }
+</style>
+<body>
+    <div class="contenedor">
+        <div class="caja"></div>
+    </div>
+    <label for="x">X</label>
+    <input name= "x" type="range" id="x" min="0" max="255" value="0" step="1">
+    <label for="y">Y</label>
+    <input name="y" type="range" id="y" min="0" max="255" value="0" step="1">
+</body>
+<script>
+        const x = document.querySelector("#x");
+    const y = document.querySelector("#y");
+    const caja = document.querySelector(".caja");
+    x.addEventListener("input", (e) => {
+        caja.style.left = `${x.value}px`;
+    });
+
+    y.addEventListener("input", (e) => {
+        caja.style.bottom = `${y.value}px`;
+    });
+</script>
+</html>
