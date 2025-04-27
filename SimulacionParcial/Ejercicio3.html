@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio3</title>
+</head>
+<style>
+    body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+    }
+    .conteiner-Contador {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    button:hover {
+        background-color: rgb(59, 227, 56);
+    }
+    #contador {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+    .buttons {
+        background-color:green; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class = "conteiner-Contador">
+        <h1>Contador  :</h1>
+        <p id="contador">0</p>
+        <div class="buttons">
+        <button id="incrementar">Incrementar</button>
+        <button id="decrementar" >Decrementar</button>  
+        <button id="resetear" >Resetear</button>
+        </div>
+    </div>
+</body>
+<script>
+    const incrementar = document.querySelector("#incrementar");
+    const decrementar = document.querySelector("#decrementar");
+    const contador = document.querySelector("#contador");
+
+    let count = 0;
+
+    incrementar.addEventListener("click", () => {
+        count++;
+        contador.textContent = count;
+    });
+
+    decrementar.addEventListener("click", () => {
+        count--;
+        contador.textContent = count;
+    });
+
+    resetear.addEventListener("click", () => {
+        count = 0;
+        contador.textContent = count;
+    });
+</script>
+</html>
