@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<style>
+    body {
+        background-color: #f4cfcf;
+        font-family: Arial, sans-serif;
+    }
+    .conteiner-Cronometro {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        text-align: center;
+        width: 300px;
+        margin: auto;
+        margin-top: 100px;
+    }
+    button {
+        background-color: rgb(250, 69, 69); 
+        border: none; 
+        color: white; 
+        padding: 10px 20px; 
+        text-align: center; 
+        font-size: 16px; 
+        margin: 4px 2px; 
+        cursor: pointer; 
+    }
+    button:hover {
+        background-color: darkblue;
+    }
+    #contador {
+        font-size: 48px;
+        margin: 20px 0;
+    }
+</style>
+<body>
+    <div class="conteiner-Cronometro">
+        <h1>Cronometro  :</h1>
+        <p id = "contador">0</p>
+        <button id="iniciar">Iniciar</button>
+        <button id="detener">Pausar</button>
+        <button id="reiniciar">Resetear</button>
+    </div>
+</body>
+<script>
+    const iniciar = document.querySelector("#iniciar");
+    const detener = document.querySelector("#detener");
+    const reiniciar = document.querySelector("#reiniciar");
+    const contador = document.querySelector("#contador");
+    let tiempo = 0;
+    let intervalo = null;
+    iniciar.addEventListener("click", () => {
+        if (intervalo === null) {
+            intervalo = setInterval(() => {
+                tiempo++;
+                contador.innerText = tiempo;
+            }, 1000);
+        }
+    });
+    detener.addEventListener("click", () => {
+        clearInterval(intervalo);
+        intervalo = null;
+    });
+    reiniciar.addEventListener("click", () => {
+        clearInterval(intervalo);
+        intervalo = null;
+        tiempo = 0;
+        contador.innerText = tiempo;
+    });
+    contador.innerText = tiempo;
+    iniciar.innerText = "Iniciar";
+    detener.innerText = "Pausar";
+    reiniciar.innerText = "Resetear";
+
+</script>
+</html>
