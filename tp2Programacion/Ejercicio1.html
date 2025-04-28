@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<body>
+    <h1 id="tituloPrincipal">Titulo</h1>
+    <p class="parrafo">Esto es el parrafo 1 se llama Sergio</p>
+    <p class="parrafo">Esto es el parrafo 2 se llama GianLuca</p>
+    <div class="contenedor">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+</body>
+<script>
+    const titulo = document.getElementById('titulo');
+    const listaItems = document.querySelectorAll('li');
+    const parrafos = document.getElementsByClassName('parrafo');
+    if (titulo) {
+        titulo.textContent = 'Hola Sergio o Gianluca (nose quien lo ve)';
+    }
+
+    for (let i = 0; i < parrafos.length; i++) {
+        parrafos[i].style.color = 'blue';
+    }
+
+    listaItems.forEach((item) => {
+        item.textContent += ' - Texto agregado, todo bien profe?';
+    });
+
+</script>
+</html>

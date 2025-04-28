@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+</head>
+<body>
+    <ul class="listaDeTareas">
+        <form action="">
+            <input type="text" id="tareaInput" placeholder="Escribe una tarea">
+            <button id="agregarTarea">Agregar Tarea</button>
+        </form>
+    </ul>
+</body>
+<script>
+    const agregarTarea = document.getElementById('agregarTarea');
+    const tareaInput = document.getElementById('tareaInput');
+    const listaDeTareas = document.querySelector('.listaDeTareas');
+    agregarTarea.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        const nuevaTarea = document.createElement('li');
+        nuevaTarea.textContent = tareaInput.value;
+        listaDeTareas.appendChild(nuevaTarea);
+        tareaInput.value = ''; 
+    });
+    listaDeTareas.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            event.target.classList.toggle('completada');
+            completada = event.textDecoration = 'line-through';
+            if (completada) {
+                event.target.style.textDecoration = 'line-through';
+            } else {
+                event.target.style.textDecoration = 'none';
+            }
+        }
+    });
+</script>
+</html>

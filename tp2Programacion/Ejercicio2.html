@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+</head>
+<body>
+    <input type="text" id ="inputTexto" placeholder="Escribe algo">
+    <button id ="button">Agregar</button>
+    <ul id = "listaItems"></ul>
+</body>
+<script>
+    const button = document.getElementById('button');
+    const inputTexto = document.getElementById('inputTexto');
+    const listaItems = document.getElementById('listaItems');
+    button.addEventListener('click', () => {
+        const nuevoItem = document.createElement('li');
+        nuevoItem.textContent = inputTexto.value;
+        listaItems.appendChild(nuevoItem);
+        inputTexto.value = ''; 
+        if (nuevoItem){
+            const buttonEliminar = document.createElement('button');
+            buttonEliminar.textContent = 'Eliminar';
+            nuevoItem.appendChild(buttonEliminar);
+            buttonEliminar.addEventListener('click', () => {
+                listaItems.removeChild(nuevoItem);
+            });
+        }
+    });
+    
+</script>
+</html>

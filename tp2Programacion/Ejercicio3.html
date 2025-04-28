@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercico3</title>
+</head>
+<style>
+    .resaltado{
+        background-color: yellow;
+        text-decoration: bold;
+    }
+    .oculto{
+        display: none;
+    }
+</style>
+<body>
+    <p class="parrafo"> parrafo 1</p>
+    <p class="parrafo"> parrafo 2</p>
+    <p class="parrafo"> parrafo 3</p>
+    <button id="resaltado">Resaltar Parrafos</button>
+    <button id ="oculto">Ocultar Parrafos</button>
+</body>
+<script>
+    const buttonResaltado = document.getElementById('resaltado');
+    const buttonOculto = document.getElementById('oculto');
+    const parrafos = document.querySelectorAll('.parrafo');
+
+    buttonResaltado.addEventListener('click', () => {
+        parrafos.forEach(parrafo => {
+            parrafo.classList.toggle('resaltado');
+        });
+    });
+
+    buttonOculto.addEventListener('click', () => {
+        parrafos.forEach(parrafo => {
+            parrafo.classList.toggle('oculto');
+        });
+    });
+</script>
+</html>
+

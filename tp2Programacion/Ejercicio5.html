@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio5</title>
+</head>
+<body>
+    <form action="">
+        <input type= "text" id = "nombre" placeholder="Escribe tu nombre" required>
+        <input type="email" id="email" placeholder="Escribe tu email" required>
+        <input type="number" id="edad" placeholder="Escribe tu edad"  required>
+        <button id="enviar">Enviar Formulario</button>
+    </form>
+</body>
+<script>
+    const nombre = document.getElementById('nombre');
+    const email = document.getElementById('email');
+    const edad = document.getElementById('edad');
+    const formulario = document.querySelector('form');
+    const enviar = document.getElementById('enviar');
+
+    document.querySelector('form').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.querySelectorAll('.error').forEach(error => error.remove());
+
+        let esValido = true;
+
+        if (nombre.value.trim() === '') {
+            errores(nombre, 'El nombre es obligatorio.');
+            esValido = false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+            errores(email, 'El email no tiene un formato válido.');
+            esValido = false;
+        }
+
+        if (isNaN(edad.value) || edad.value <= 18) {
+            errores(edad, 'La edad debe ser un número mayor a 18.');
+            esValido = false;
+        }
+
+        if (esValido) {
+            alert('Formulario enviado correctamente.');
+        }
+        });
+
+        function errores(input, message) {
+            const error = document.createElement('div');
+            error.className = 'error';
+            error.style.color = 'red';
+            error.textContent = message;
+            input.insertAdjacentElement('afterend', error);
+        }
+</script>
+</html>
