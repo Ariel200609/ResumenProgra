@@ -10,6 +10,10 @@
 text-align: center;
 }
 
+#imagenPrincipal{
+    width: 400px;
+}
+
 .miniaturas {
 margin-top: 20px;
 display: flex;
@@ -19,7 +23,6 @@ gap: 10px;
 
 .miniatura {
 cursor: pointer;
-border: 2px solid transparent;
 }
 
 .miniatura:hover {
@@ -38,17 +41,16 @@ border-color: blue;
 </style>
 <body>
     <div class="galeria">
-        <img id="imagenPrincipal" src="thumb1.jpg" alt="Imagen Principal" width="400">
+        <img id="imagenPrincipal" src="thumb1.jpg">
 
         <div class="miniaturas">
-        <img class="miniatura" src="thumb1.jpg" alt="Miniatura 1" width="100">
-        <img class="miniatura" src="thumb2.jpg" alt="Miniatura 2" width="100">
-        <img class="miniatura" src="thumb3.jpg" alt="Miniatura 3" width="100">
-        <img class="miniatura" src="thumb4.jpg" alt="Miniatura 4" width="100">
+        <img class="miniatura" src="thumb1.jpg" >
+        <img class="miniatura" src="thumb2.jpg" >
+        <img class="miniatura" src="thumb3.jpg" >
+        <img class="miniatura" src="thumb4.jpg" >
         </div>
     </div>
 </body>
-
 <script>
 const miniaturas = document.querySelectorAll(".miniatura");
 const imagenPrincipal = document.getElementById("imagenPrincipal");
