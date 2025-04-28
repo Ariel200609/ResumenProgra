@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio1</title>
+</head>
+<style>
+.galeria {
+text-align: center;
+}
+
+.miniaturas {
+margin-top: 20px;
+display: flex;
+justify-content: center;
+gap: 10px;
+}
+
+.miniatura {
+cursor: pointer;
+border: 2px solid transparent;
+}
+
+.miniatura:hover {
+border-color: blue; 
+}
+@media (max-width: 600px) {
+#imagen-principal {
+    width: 90%;
+}
+
+.miniaturas {
+    flex-direction: column;
+    align-items: center;
+}
+}
+</style>
+<body>
+    <div class="galeria">
+        <img id="imagenPrincipal" src="thumb1.jpg" alt="Imagen Principal" width="400">
+
+        <div class="miniaturas">
+        <img class="miniatura" src="thumb1.jpg" alt="Miniatura 1" width="100">
+        <img class="miniatura" src="thumb2.jpg" alt="Miniatura 2" width="100">
+        <img class="miniatura" src="thumb3.jpg" alt="Miniatura 3" width="100">
+        <img class="miniatura" src="thumb4.jpg" alt="Miniatura 4" width="100">
+        </div>
+    </div>
+</body>
+
+<script>
+const miniaturas = document.querySelectorAll(".miniatura");
+const imagenPrincipal = document.getElementById("imagenPrincipal");
+
+    miniaturas.forEach(function(miniatura) {
+    miniatura.addEventListener("click", function() {
+    imagenPrincipal.src = miniatura.src;
+    });
+});
+</script>
+</html>
