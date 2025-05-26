@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+
+//modelos 
 let id = 2;
 let data = [{
     id: 1,
@@ -9,13 +11,56 @@ let data = [{
     password: "1234"
 }];
 
-app.get('/', (req, res) => {
+function getPacienteModel(){
+    return new Promise ((resolve, reject) => {
+        
+        resolve(data);
 
-    res.status(200).json('data');
+        if (data.length = 0 ){
+            
+            reject( new Error("La lista esta vacia"))
+        }
+    });
+}
 
-});
+function getPacienteporIdModel(id){
+    
+}
+//fin de modelos
 
-app.post("/", (req, res) => {
+
+//controladores
+function getPacientes(req, res) {
+    getPacienteModel()
+    .then((d) => {
+        res.status(200).json('d');
+    }).catch((error) => {
+        res.status(400).json({ error: error.message })
+    })
+}
+
+function getPacientePorId(req, res) {
+    try {
+        const id = req.params.id;
+
+        if (!id) {
+            throw new Error("ID inválido");
+        }
+
+        const paciente = data.find((p) => p.id == id);
+
+        if (!paciente) {
+            throw new Error("No existe el paciente " + id + " en la base de datos");
+        }
+
+        res.status(200).json({ paciente });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+}
+
+function crearPaciente(req, res) {
     try {
         // const nombre = req.nombre;
         // const email = req.body.email;
@@ -53,77 +98,13 @@ app.post("/", (req, res) => {
         return res.status(500).json({ error: error.message });
 
     }
-});
+}
 
-app.put('/modificar/:id', (req, res) => {
+function modificarPaciente(req, res) {
     const id = req.params.id;
     const { nombre, email, password } = req.body;
+
     try {
-        if (!paciente) {
-            throw new Error("No existe el paciente" + id + " en la base de datos");
-        }
-        if (nombre === undefined || nombre === null || nombre === "") {
-            throw new Error("nombre Invalido");
-        }
-        if (password === undefined || password === null || password === "") {
-            throw new Error(" Completa la contra gil ");
-        }
-        if (email === undefined | email === null | email === "") {
-            throw new Error(" Completa email gil ");
-        }
-
-
-        if (id == undefined || id == null || id == "") {
-            throw new Error("id Invalido");
-        }
-
-
-        const paciente = data.find((p) => p.id == id);
-        if (!paciente) {
-            throw new Error("No existe el paciente" + id + " en la base de datos");
-        }
-        paciente.nombre=nombre;
-        paciente.email=email;
-        paciente.password=password;
-
-        res.status(200).json({paciente});
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: error.message });
-    }
-});
-
-app.delete('/eliminar/:id', (req, res) => {
-    try{
-    const id = req.params.id;
-    const paciente = data.find((p) => {
-        return p.id == id;
-    })
-
-    if (!paciente) {
-        throw new Error("No existe el paciente" + id + " en la base de datos");
-    }
-
-    const index = data.indexOf(paciente);
-
-    // const index= data.findIndex((p) => p.id == id);
-    //     if (index == -1) {
-    //         throw new Error("No existe el paciente" + id + " en la base de datos");
-    //     }
-    // data.splice(index, 1);
-    data.splice(index, 1);
-    res.status(200).json({ mensaje: `Paciente ${paciente.nombre} eliminado correctamente` });
-    }
-    catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: error.message });
-    }
-});
-
-app.get('/id/:id', (req, res) => {
-    try {
-        const id = req.params.id;
-
         if (!id) {
             throw new Error("ID inválido");
         }
@@ -134,13 +115,63 @@ app.get('/id/:id', (req, res) => {
             throw new Error("No existe el paciente " + id + " en la base de datos");
         }
 
-        res.status(200).json({ paciente });
+        if (nombre === undefined || nombre === null || nombre === "") {
+            throw new Error("nombre Invalido");
+        }
+        if (password === undefined || password === null || password === "") {
+            throw new Error(" Completa la contra gil ");
+        }
+        if (email === undefined | email === null | email === "") {
+            throw new Error(" Completa email gil ");
+        }
+
+        paciente.nombre = nombre;
+        paciente.email = email;
+        paciente.password = password;
+
+        res.status(200).json({ mensaje: `Paciente ${paciente.nombre} modificado correctamente` });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
     }
-});
+}
 
+function eliminarPaciente(req, res) {
+    const id = req.params.id;
+
+    try {
+        if (!id) {
+            throw new Error("ID inválido");
+        }
+
+        const paciente = data.find((p) => p.id == id);
+
+        if (!paciente) {
+            throw new Error("No existe el paciente " + id + " en la base de datos");
+        }
+
+        const index = data.indexOf(paciente);
+        data.splice(index, 1);
+
+        res.status(200).json({ mensaje: `Paciente ${paciente.nombre} eliminado correctamente` });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: error.message });
+    }
+}
+//fin de controladores
+
+//rutas 
+app.get('/:id',getPacientePorId);
+
+app.get('/',getPacientes);
+
+app.post("/", crearPaciente);
+
+app.put('/modificar/:id', modificarPaciente);
+
+app.delete('/eliminar/:id', eliminarPaciente);
+//fin de rutas 
 
 app.listen(3000, () => {
     console.log('Hola Mundo');
